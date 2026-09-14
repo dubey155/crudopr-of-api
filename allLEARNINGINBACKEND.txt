@@ -1,0 +1,154 @@
+const express = require("express")
+const users = require("./MOCK_DATA.json")
+
+const mongoose = require("mongoose")
+const fs = require("fs")
+const app = express()
+const PORT = 8000
+
+//connecting to mongodb 
+mongoose
+  .connect("mongodb://127.0.0.1:27017/usersdb")
+  .then(() => console.log("connected to mongodb"))
+  .catch((err) => console.log(err))
+
+
+  //schema for mongodb crud operations 
+const userSchema = new mongoose.Schema({
+  firstName:{type:String,
+    required :true },
+  lastName:{type :String},
+  email:{type:String,require:true,unique:true},//unique true means no email should repeat 
+  jobTitle:{type:String},
+  gender:{type:String}
+})
+const User = mongoose.model("user",userSchema)
+
+//middleware
+app.use(express.urlencoded({extended:false}))
+
+//create a middleware
+/*app.use((req,res,next) =>{
+  fs.appendFile("log.txt",`${req.method}\n ${Date.now()}\n ${req.ip} ${req.url}\n`,
+  (err,data) =>{
+    next()
+})})*/
+
+/*app.use((req,res,next) =>{
+  console.log("hello from middleware 2")
+  return res.end("hello")// this will end the request and response cycle and will not call the next middleware or route handler
+})
+*/  
+//html page rendering 
+app.get("/name/users",(req,res) =>{
+    const html =`
+    <ul>
+      ${users.map((user) => `<li>${user.first_name}</li>`).join("")}
+    </ul>
+    `
+    res.send(html)
+})
+app.get("/users",(req,res)=>{
+    res.json(users)
+}) 
+
+//Routes(REST API )
+/*
+app.get("/api/users",(req,res)=>{
+    res.json(users)
+})
+
+app.get("/api/users/:id",(req,res) =>{
+  const id = Number(req.params.id)
+  const user = users.find((user) => user.id === id)
+  if(user){
+    res.json(user)
+  }else{
+    res.status(404).json({message:"User not found"})
+  }
+})
+
+app.post("/api/users",(req,res) =>{
+  //crete a new user 
+  return res.json({status:"pending "})
+})
+app.patch("/api/users/:id",(req,res) =>{
+  //update a user 
+  return res.json({status:"pending "})
+})
+app.delete("/api/users/:id",(req,res) =>{
+  //delete a user 
+  return res.json({status:"pending "})
+})
+*/
+//same as above if you want to same route with different method you can use route method
+app
+  .route("/api/users/:id")
+  .get((req,res) =>{
+    const id = Number(req.params.id)
+  const user = users.find((user) => user.id === id)
+  if(user){
+    res.json(user)
+  }else{
+    res.status(404).json({message:"User not found"})
+  }
+
+  }) 
+  
+  .patch((req,res) =>{
+    const id = Number(req.params.id )
+    const userIndex = users.findIndex((user) => user.id === id)
+    if(userIndex !== -1){
+      const body = req.body
+      users[userIndex] = {...users[userIndex], ...body}
+      fs.writeFile("./MOCK_DATA.json",JSON.stringify(users),(err,data) =>{
+        return res.json({status:"success"})
+      })
+    }else{
+      res.status(404).json({message:"User not found"})
+    }
+  })
+  .delete((req,res) =>{
+    const id = Number(req.params.id )
+    const userIndex = users.findIndex((user) => user.id === id)
+    if(userIndex !== -1){
+      users.splice(userIndex,1)
+      fs.writeFile("./MOCK_DATA.json",JSON.stringify(users),(err,data) =>{
+        return res.json({status:"success"})
+      })
+    }else{
+      res.status(404).json({message:"User not found"})
+    }
+  })
+/*app.post("/api/users",(req,res) =>{
+  //crete a new user 
+  const body = req.body
+  users.push({...body,id:users.length + 1,})
+  fs.writeFile("./MOCK_DATA.json",JSON.stringify(users),(err,data) =>{
+    return res.json({status:"success",id:users.length })
+  })
+})*/
+
+app.post("/api/users",async (req,res) =>{
+  const body = req.body
+  if(
+    !body||
+    !body.firstName||
+    !body.lastName||
+    !body.email||
+    !body.jobTitle||
+    !body.gender
+  )
+  {return res.status(400).json({message:"All fields are required"})}
+
+
+  const result =await User.create({
+  firstName:body.firstName,
+  lastName:body.lastName,
+  email:body.email,
+  jobTitle:body.jobTitle,
+  gender:body.gender
+})
+  return res.status(201).json(result)
+})
+app.listen(PORT,() => console.log(`server is started at the port ${PORT}`))

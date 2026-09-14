@@ -1,0 +1,13 @@
+REST API -JSON 
+
+GET/api/users - list all the users - done 
+GET/api/users/1 - get the user with id 1 - done
+GET/api/users/2 - get the user with id 2 - done 
+
+POST/api/users- create new users 
+PATCH /api/users/1(this 1 is dynamic route) - edit the user with id 1 
+
+DYNAMIC PATH PARAMETER
+GET/api/users/:id(by adding : id became variable)
+
+DELETE/api/users/1 - delete the user with id 1 
