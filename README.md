@@ -4,7 +4,7 @@ A Node.js + Express + MongoDB (Atlas) REST API with a minimal HTML frontend for 
 
  🔗 Live Demo
 
-> After deployment: `https://your-app-name.onrender.com`
+> After deployment: `https://crudopr-nvtt.onrender.com/`
 
 Tech Stack
 
@@ -17,24 +17,24 @@ Tech Stack
 
 Project Structure
 project-1/
-├── Controllers/
-│ └── user_controller.js # Route handler logic
-├── middlewares/
-│ └── middleware.js # Request logger
-├── models/
-│ └── model_user.js # Mongoose user schema
-├── routes/
-│ └── op_route.js # Express routes
-├── views/
-│ └── index.html # Simple frontend
-├── .env # Secrets (NOT committed)
-├── .gitignore
-├── database.js # MongoDB connection
-├── server.js # App entry point
-└── package.json
+Controllers/
+  :: user_controller.js # Route handler logic
+ middlewares/
+  :: middleware.js # Request logger
+ models/
+  ::model_user.js # Mongoose user schema
+ routes/
+  :: op_route.js # Express routes
+ views/
+  :: index.html # Simple frontend
+ ::.env # Secrets (NOT committed)
+ :: .gitignore
+ :: database.js # MongoDB connection
+  :: server.js # App entry point
+  ::package.json
 
 
-## 🚀 API Endpoints
+API Endpoints
 
 Base URL: `http://localhost:8000`
 
@@ -57,5 +57,8 @@ curl -X POST http://localhost:8000/api/users \
     "lastName": "Doe",
     "email": "john@example.com",
     "gender": "male",
+
+
+ AUTHOR=KALPADRUM DUBEY   
     "jobTitle": "Developer"
   }'
