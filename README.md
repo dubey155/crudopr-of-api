@@ -17,8 +17,8 @@ Tech Stack
 
 Project Structure
 project-1/
-Controllers/
-  :: user_controller.js # Route handler logic
+Controllers/\n
+  :: user_controller.js # Route handler logic\n
  middlewares/
   :: middleware.js # Request logger
  models/
