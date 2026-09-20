@@ -4,9 +4,6 @@ dns.setDefaultResultOrder("ipv4first")
 
 
 require("dotenv").config()
-console.log("LENGTH:", process.env.MONGO_URI?.length)
-console.log("FIRST 30 CHARS:", JSON.stringify(process.env.MONGO_URI?.slice(0, 30)))
-console.log("LAST 20 CHARS:", JSON.stringify(process.env.MONGO_URI?.slice(-20)))
 
 const express = require("express")
 const { connectMongodb } = require("./database")
