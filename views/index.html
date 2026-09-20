@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Users CRUD</title>
+  <style>
+    body { font-family: system-ui; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    input, button { padding: 8px; margin: 4px 0; }
+    input { width: 100%; box-sizing: border-box; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    button { cursor: pointer; }
+    .row { display: flex; gap: 8px; }
+    .row input { flex: 1; }
+  </style>
+</head>
+<body>
+  <h1>Users</h1>
+
+  <h3>Create User</h3>
+  <input id="fn" placeholder="First name" />
+  <input id="ln" placeholder="Last name" />
+  <input id="em" placeholder="Email" />
+  <input id="gd" placeholder="Gender" />
+  <input id="jb" placeholder="Job title" />
+  <button onclick="createUser()">Add User</button>
+<script>
+const API = ""; // same origin when served by Express
+
+/*async function loadUsers() {
+  const res = await fetch("/api/users");
+  const users = await res.json();
+  const tbody = document.querySelector("#tbl tbody");
+  tbody.innerHTML = users.map(u => `
+    <tr>
+      <td>${u._id}</td>
+      <td>${u.firstName || ""} ${u.lastName || ""}</td>
+      <td>${u.email || ""}</td>
+      <td><button onclick="delUser('${u._id}')">Delete</button></td>
+    </tr>
+  `).join("");
+}*/
+async function createUser() {
+  const body = {
+    firstName: fn.value,
+    lastName: ln.value,
+    email: em.value,
+    gender: gd.value,
+    jobTitle: jb.value
+  };
+
+  const res = await fetch("/api/users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+
+  if (res.ok) {
+    fn.value = ln.value = em.value = gd.value = jb.value = "";
+    loadUsers();
+  } else {
+    const err = await res.json();
+    alert("Failed to create user: " + (err.message || res.status));
+  }
+}
+async function delUser(id) {
+  await fetch(`${API}/api/users/${id}`, { method: "DELETE" });
+  loadUsers();
+}
+
+loadUsers();
+</script>
+</body>
+</html>

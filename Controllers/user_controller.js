@@ -51,18 +51,20 @@ async function handleDeleteuserbyid(req,res){
       res.status(500).json({ message: error.message })
     }
 }
-async function handleCreateanewuser(req,res){
-    const body = req.query
-  if(
-    !body||
-    !body.firstName||
-    !body.lastName||
-    !body.email||
-    !body.jobTitle||
+async function handleCreateanewuser(req, res) {
+  const body = req.body
+  if (
+    !body ||
+    !body.firstName ||
+    !body.lastName ||
+    !body.email ||
+    !body.jobTitle ||
     !body.gender
-  )
-  {return res.status(400).json({message:"All fields are required"})}
-    try {
+  ) {
+    return res.status(400).json({ message: "All fields are required" })
+  }
+
+  try {
     const result = await User.create({
       firstName: body.firstName,
       lastName: body.lastName || "",

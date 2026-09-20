@@ -250,3 +250,84 @@ GET
 POST
  1787920472348
  ::1 /api/users?firstName=mik&lastName=ross&email=mikross@gmail.com&jobTitle=swe&gender=male
+POST
+ 1789934304860
+ ::1 /api/users?firstName=mik&lastName=ross&email=mikross@gmail.com&jobTitle=swe&gender=male
+GET
+ 1789935271756
+ ::1 /index.html
+GET
+ 1789935271838
+ ::1 /api/users
+GET
+ 1789935271895
+ ::1 /favicon.ico
+DELETE
+ 1789935285060
+ ::1 /api/users/6ab03ae05cd5bd1f988c780e
+GET
+ 1789935285128
+ ::1 /api/users
+POST
+ 1789935329108
+ ::1 /api/users
+POST
+ 1789935336044
+ ::1 /api/users
+POST
+ 1789935440537
+ ::1 /api/users
+POST
+ 1789935457601
+ ::1 /api/users
+POST
+ 1789935584638
+ ::1 /api/users
+POST
+ 1789935708328
+ ::1 /api/users
+POST
+ 1789935731177
+ ::1 /api/users
+POST
+ 1789935875777
+ ::1 /api/users
+POST
+ 1789935899292
+ ::1 /api/users
+POST
+ 1789935942711
+ ::1 /api/users
+POST
+ 1789936062405
+ ::1 /api/users
+POST
+ 1789936072403
+ ::1 /api/users
+POST
+ 1789936139531
+ ::1 /api/users
+POST
+ 1789936145569
+ ::1 /api/users
+GET
+ 1789936264289
+ ::1 /index.html
+GET
+ 1789936264348
+ ::1 /api/users
+POST
+ 1789936277589
+ ::1 /api/users
+GET
+ 1789936277730
+ ::1 /api/users
+GET
+ 1789936504741
+ ::1 /index.html
+POST
+ 1789936522954
+ ::1 /api/users
+GET
+ 1789936845106
+ ::1 /index.html
