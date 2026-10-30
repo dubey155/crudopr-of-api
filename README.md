@@ -2,9 +2,7 @@
 
 A Node.js + Express + MongoDB (Atlas) REST API with a minimal HTML frontend for creating and managing users.
 
- 🔗 Live Demo
-
-> After deployment: `https://crudopr-nvtt.onrender.com/`
+ 🔗 Live Demo: `https://crudopr-nvtt.onrender.com/`
 
 Tech Stack
 
